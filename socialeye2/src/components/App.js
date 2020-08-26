@@ -139,10 +139,8 @@ class App extends React.Component {
     render() {
         return (
             <div style={{margin: 0}}>
-                <Navbar/>
+                <Navbar  handleCreateProps={this.handleCreate}/>
             <Grid>
-                {/* <Header /> */}
-                <InputChannel handleCreateProps={this.handleCreate} />
                 <ChannelList channels={this.state.channels} handleChangeProps={this.handleChange} handleDeleteProps={this.handleDelete}/>
             </Grid>
         </div>

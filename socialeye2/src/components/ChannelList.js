@@ -1,6 +1,8 @@
 import React from "react"
 import ChannelItem from "./ChannelItem"
 import {List, ListItem} from '@material-ui/core'
+
+
 class ChannelList extends React.Component 
 {
     render() 

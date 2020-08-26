@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +14,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+// Google login
+import GLogin from './GLogin'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -79,7 +81,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
+// trying hooks
+const [navState, setNavState] = useState(props);
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -103,6 +108,14 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  // function onSignIn(googleUser) {
+  //   var profile = googleUser.getBasicProfile();
+  //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  //   console.log('Name: ' + profile.getName());
+  //   console.log('Image URL: ' + profile.getImageUrl());
+  //   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  // }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -147,6 +160,7 @@ export default function NavBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -160,27 +174,39 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
-
+  
+    const searched = (key) => {
+        if(key.keyCode === 13)
+        {
+          console.log(navState);
+          props.handleCreateProps(navState);
+        }
+    }
+    const handleit = (h) =>
+    {
+      setNavState(h.target.value);
+    }
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography className={classes.title} variant="h6" noWrap>
             SocialEye
           </Typography>
-          <div className={classes.search}>
+          <div className={classes.search} >
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
+            onKeyDown={searched} onChange={handleit}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -196,11 +222,13 @@ export default function NavBar() {
                 <MailIcon />
               </Badge>
             </IconButton>
+            <GLogin/>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            
             <IconButton
               edge="end"
               aria-label="account of current user"
