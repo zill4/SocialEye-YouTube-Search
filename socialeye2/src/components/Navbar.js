@@ -216,7 +216,7 @@ const [navState, setNavState] = useState(props);
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          {/* <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
@@ -250,7 +250,7 @@ const [navState, setNavState] = useState(props);
             >
               <MoreIcon />
             </IconButton>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

@@ -103,7 +103,7 @@ class App extends React.Component {
                 part: 'snippet',
                 order: 'viewCount',
                 type: 'channel',
-                maxResults: 50,
+                maxResults: 100,
                 key: 'AIzaSyDyNdz6KFlytSlBHDKUS-3UmccNOhC3MIo',
                 q: title
             }
@@ -141,6 +141,7 @@ class App extends React.Component {
             <div style={{margin: 0}}>
                 <Navbar  handleCreateProps={this.handleCreate}/>
             <Grid>
+                <Header/>
                 <ChannelList channels={this.state.channels} handleChangeProps={this.handleChange} handleDeleteProps={this.handleDelete}/>
             </Grid>
         </div>
